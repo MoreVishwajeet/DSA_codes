@@ -1,0 +1,26 @@
+#include <bits/stdc++.h>
+
+int LongestSubsetWithZeroSum(vector < int > arr) {
+
+  int n = arr.size();
+  int prefixSum = 0;
+
+  unordered_map <int,int> freq_map;
+
+  int myax = 0;
+  for(int i=0; i<n; i++){
+    prefixSum += arr[i];
+    if(prefixSum==0){
+      myax = max(myax , i+1);
+    }
+
+    if(freq_map.find(prefixSum)!=freq_map.end()){
+      myax = max(myax,i-freq_map[prefixSum]);
+    }else{
+      freq_map[prefixSum] = i;
+    }
+    
+  }
+  return myax;
+
+}
