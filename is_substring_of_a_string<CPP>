@@ -1,0 +1,22 @@
+#include <bits/stdc++.h> 
+bool isSubSequence(string str1, string str2) {
+    //str1 and str2 have capital char's
+    int n1 = str1.size();
+    int n2 = str2.size();
+
+    int i=0, j=0;
+
+    char lookin_for = 'a';
+
+    while(i<n1 && j<n2){
+        if(str2[j]==str1[i]){
+            i++;
+        }
+        j++;
+    }
+    if(i!=n1){
+        return false;
+    }
+
+    return true;
+}
