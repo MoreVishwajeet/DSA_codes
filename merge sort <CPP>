@@ -1,0 +1,49 @@
+void merge(vector < int > & arr, int start ,int mid, int end){
+    vector <int> temp;
+
+    int i = start;
+    int j = mid+1;
+
+    while(i<mid+1 && j<end+1){
+        if(arr[i]<arr[j]){
+            temp.push_back(arr[i]);
+            i++;
+        }else{
+            temp.push_back(arr[j]);
+            j++;
+        }
+    }
+
+    while(i<mid+1){
+        temp.push_back(arr[i]);
+        i++;
+    }
+
+    while(j<end+1){
+        temp.push_back(arr[j]);
+        j++;
+    }
+
+    for(int i=0; i<temp.size(); i++){
+        arr[start+i] = temp[i];
+    }
+}
+
+void mergeSortHelper(vector < int > & arr, int start, int end){
+
+    int mid = 0;
+
+    if(start<end){
+        mid = start +(end-start)/2;
+
+        mergeSortHelper(arr, start, mid);
+        mergeSortHelper(arr, mid+1, end);
+
+        merge(arr, start, mid,  end);
+    }
+}
+
+void mergeSort(vector < int > &arr, int n) {
+    mergeSortHelper(arr, 0, n-1);
+
+}
