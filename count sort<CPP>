@@ -1,0 +1,31 @@
+#include <bits/stdc++.h> 
+vector<int> sort(int n, vector<int> &arr)
+{
+    int min_val = *min_element(arr.begin(),arr.end());
+
+    if(min_val<0){
+        for(int &num : arr){
+            num += abs(min_val);
+        }
+    }
+
+    int myax = *max_element(arr.begin(),arr.end());
+    vector<int> count(myax+1,0);
+
+    for(int num : arr){
+        count[num]++;
+    }
+
+    vector<int> pos(myax+1,0);
+    pos[0] = count[0];
+    for(int i=1; i<=myax; i++){
+        pos[i] = pos[i-1] + count[i];
+    }
+
+    vector <int> temp = arr;
+    for(int i=0; i<n; i++){
+        arr[--pos[temp[i]]] = temp[i] - ((min_val<0)?abs(min_val):0);
+    }
+
+    return arr;
+}
