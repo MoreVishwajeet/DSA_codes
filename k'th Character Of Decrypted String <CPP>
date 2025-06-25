@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+
+char kThCharaterOfDecryptedString(string s, long long k)
+{
+    string times = "";
+    string ss = "";
+    long long count = 0;
+    for(int i=0; i<s.size(); i++){
+        if(isdigit(s[i])){
+            times += s[i];
+            if(isdigit(s[i+1])){
+                continue;
+            }else{
+                count = stoll(times);
+                long slen = ss.size();
+                k = k - slen*count;
+                if(k<=0){
+                    k = abs(k)%slen;
+                    return ss[slen-1-k];
+
+
+                }
+                times = "";
+                ss = "";
+            }
+        }else{
+            ss += s[i];
+        }
+    }
+
+    return ' ';
+}
