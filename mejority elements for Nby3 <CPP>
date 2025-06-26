@@ -1,0 +1,44 @@
+#include <bits/stdc++.h>
+
+vector<int> majorityElementII(vector<int> &arr)
+{
+    vector<int> ans;
+
+	int cand1 = INT_MIN, cand2 = cand1, count1 = 0, count2 = count1, n = arr.size();
+
+	for(int i=0; i<n; i++){
+		if(arr[i]==cand1){
+			count1++;
+		}else if(arr[i]==cand2){
+			count2++;
+		}else if(count1==0){
+			cand1 = arr[i];
+			count1++;
+		}else if(count2==0){
+			cand2 = arr[i];
+			count2++;
+		}else{
+			count1--;
+			count2--;
+		}
+	}
+
+	count1 = 0, count2 = count1;
+
+	for(int i=0; i<n; i++){
+		if(arr[i]==cand1){
+			count1++;
+		}else if(arr[i]==cand2){
+			count2++;
+		}
+	}
+
+	if(count1>floor(n/3)){
+		ans.push_back(cand1);
+	}
+	if(count2>floor(n/3)){
+		ans.push_back(cand2);
+	}
+
+	return ans;
+}
