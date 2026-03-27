@@ -1,0 +1,29 @@
+#include <bits/stdc++.h> 
+vector<int> findTriplets(vector<int> &arr, int n) 
+{
+    vector <int> ans;
+
+    sort(arr.begin(),arr.end());
+
+    for(int i=n-1; i>=0; i--){
+        int x = 0;
+        int y = i-1;
+
+        bool found = false;
+
+        while(x<y){
+            if(arr[x]+arr[y]==arr[i]){
+                ans.insert(ans.end(),{arr[x],arr[y],arr[i]});
+                found = true;
+                break;
+            }else if(arr[x]+arr[y]<arr[i]){
+                x++;
+            }else{
+                y--;
+            }
+        }
+
+        if(found) break;
+    }
+    return ans;
+}
